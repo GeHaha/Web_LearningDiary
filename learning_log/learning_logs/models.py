@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Topic(models.Model):
@@ -7,6 +9,8 @@ class Topic(models.Model):
     text = models.CharField(max_length = 2000) 
     #data_added是一个DataTimeField记录日期和时间的数据，每当用户创建新主题时，都让Django将这个属性自动设置成当前日期和时间
     date_added = models.DateTimeField(auto_now_add = True)
+    owner = models.ForeignKey(User)
+    
     
     #我们需要告诉Django,默认使用哪个属性来显示有关主题的信息。调用方法__str__来显示模型的简单表示，返回储存在属性text中的字符串
     def __str__(self):
